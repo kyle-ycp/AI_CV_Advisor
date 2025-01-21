@@ -5,6 +5,7 @@ from io import BytesIO
 import pdfkit
 import markdown
 from chatbot import generate_chat_completion
+import os
 
 # Set app icon and title
 st.set_page_config(page_title="AI-Powered CV Analyzer", page_icon="📄")
@@ -38,6 +39,7 @@ def generate_pdf(markdown_text):
 
 # Streamlit UI
 st.title("AI-Powered CV Analyzer")
+st.write(os.environ['PATH'])
 
 uploaded_file = st.file_uploader("Upload your CV (PDF or DOCX)", type=["pdf", "docx"])
 
