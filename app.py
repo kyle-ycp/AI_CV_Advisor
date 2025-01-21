@@ -5,6 +5,10 @@ from io import BytesIO
 import pdfkit
 import markdown
 from chatbot import generate_chat_completion
+import os
+import subprocess
+
+os.environ['PATH'] += ':/usr/bin'
 
 # Set app icon and title
 st.set_page_config(page_title="AI-Powered CV Analyzer", page_icon="📄")
@@ -30,7 +34,7 @@ def generate_pdf(markdown_text):
     }
 
     html_text = markdown.markdown(markdown_text)
-    config = pdfkit.configuration(wkhtmltopdf='C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe')  # Adjust path as necessary
+    config = pdfkit.configuration(wkhtmltopdf="/usr/bin/wkhtmltopdf")  # Adjust path as necessary
     pdf_data = pdfkit.from_string(html_text, False,options=options, configuration=config)
 
     return pdf_data
@@ -38,6 +42,13 @@ def generate_pdf(markdown_text):
 
 # Streamlit UI
 st.title("AI-Powered CV Analyzer")
+st.write(os.environ['PATH'])
+
+try:
+    result = subprocess.run(['wkhtmltopdf', '--version'], capture_output=True, text=True)
+    st.write("wkhtmltopdf is accessible:", result.stdout)
+except FileNotFoundError:
+    st.write("wkhtmltopdf not found in the environment.")
 
 uploaded_file = st.file_uploader("Upload your CV (PDF or DOCX)", type=["pdf", "docx"])
 

@@ -1,9 +1,8 @@
 from openai import OpenAI
+import streamlit as st 
 import os
-from dotenv import load_dotenv
 
-load_dotenv()
-api_key = os.getenv("API_TOKEN")
+api_key = st.secrets["API_TOKEN"]
 
 def generate_chat_completion(prompt):
     client = OpenAI(
