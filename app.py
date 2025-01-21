@@ -30,7 +30,7 @@ def generate_pdf(markdown_text):
     }
 
     html_text = markdown.markdown(markdown_text)
-    config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')  # Adjust path as necessary
+    config = pdfkit.configuration()  # Adjust path as necessary
     pdf_data = pdfkit.from_string(html_text, False,options=options, configuration=config)
 
     return pdf_data
