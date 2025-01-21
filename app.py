@@ -7,6 +7,8 @@ import markdown
 from chatbot import generate_chat_completion
 import os
 
+os.environ['PATH'] += ':/usr/bin'
+
 # Set app icon and title
 st.set_page_config(page_title="AI-Powered CV Analyzer", page_icon="📄")
 
