@@ -31,7 +31,7 @@ def generate_pdf(markdown_text):
     }
 
     html_text = markdown.markdown(markdown_text)
-    config = pdfkit.configuration(wkhtmltopdf="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/adminuser/.local/bin:/home/adminuser/venv/bin:/opt/mssql-tools/bin/wkhtmltopdf")  # Adjust path as necessary
+    config = pdfkit.configuration(wkhtmltopdf="/usr/bin/wkhtmltopdf")  # Adjust path as necessary
     pdf_data = pdfkit.from_string(html_text, False,options=options, configuration=config)
 
     return pdf_data
