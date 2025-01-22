@@ -3,3 +3,4 @@ Markdown==3.7
 openai==1.59.7
 pdfkit==1.0.0
 pdfplumber==0.11.5
+pdf2image
