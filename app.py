@@ -9,7 +9,14 @@ from chatbot import generate_chat_completion
 import os
 
 # Set app icon and title
-st.set_page_config(page_title="AI-Powered CV Analyzer", page_icon="📄", menu_items={})
+st.set_page_config(page_title="AI-Powered CV Analyzer", page_icon="📄", 
+                   menu_items=
+                   {
+                        'Get Help': 'https://www.extremelycoolapp.com/help',
+                        'Report a bug': "https://www.extremelycoolapp.com/bug",
+                        'About': "# This is a header. This is an *extremely* cool app!"
+                    }
+)
 
 def extract_text_from_file(uploaded_file):
     if uploaded_file.type == "application/pdf":
