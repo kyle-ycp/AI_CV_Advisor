@@ -10,7 +10,7 @@ import os
 from docx import Document
 
 # Set app icon and title
-st.set_page_config(page_title="AI-Powered CV Advisor", page_icon="📄", 
+st.set_page_config(page_title="AI-Powered CV Advisor", page_icon="📄", layout="wide", 
                    menu_items=
                    {
                         'Get Help': 'https://www.extremelycoolapp.com/help',
@@ -212,12 +212,18 @@ with col2:
                 st.markdown(message["content"])
 
     # React to user input
-    if prompt := st.chat_input("What is up?"):
-        # Display user message in chat message container
-        st.chat_message("user").markdown(prompt)
+    if user_message := st.chat_input("What is up?"):
         # Add user message to chat history
-        st.session_state.messages.append({"role": "user", "content": prompt})
+        st.session_state.messages.append({"role": "user", "content": user_message})
 
+        # Display user message in Chat Display
+        with messages_placeholder:
+            with st.chat_message("user"):
+                st.markdown(user_message)
+
+        # Generate AI response
+            conversation_history_list = st.session_state.messages
+        
         # Create a comprehensive prompt for the chatbot
         if uploaded_file:
             # Include additional information in the prompt
@@ -228,24 +234,25 @@ with col2:
             CV Content: {cv_text}
             User Query: {prompt}
             """
-            chatbot_prompt = f"""
+            prompt = f"""
             Imagine you are a professional career advisor. 
             Please provide advice based on the following details:
             {additional_context}
             """
-        
-        else: 
-            chatbot_prompt = f"""
-            Imagine you are a professional career advisor. 
-            """
 
-        response = generate_chat_completion(chatbot_prompt).content
-        # Display assistant response in chat message container
-        with st.chat_message("assistant"):
-            st.markdown(response)
-        # Add assistant response to chat history
+        else:
+            prompt = f"""Imgine you are a professional career advisor, please comment on the below CV content.
+                            CV: {cv_text} """
+
+        response = f"{generate_chat_completion(prompt + user_message).content}"
+
+        # Append "assistant" message to chat history
         st.session_state.messages.append({"role": "assistant", "content": response})
-
+        # Display assistant response in chat message container
+        with messages_placeholder:
+            with st.chat_message("assistant"):
+                st.markdown(response)
+        
 
 # Additional UI Elements
 st.markdown("---")
