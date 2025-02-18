@@ -4,7 +4,7 @@
 
 The AI-Powered CV Advisor is a web application designed to assist users in creating, revising, and optimizing their CVs. Leveraging advanced AI models, the application provides personalized feedback and suggestions to enhance the formatting and content of CVs and tailor-made Cover Letter, making them more appealing to potential employers.
 
-The web-app link: https://cvanalyzer-abjquyzbxddgjwixagw7dh.streamlit.app/
+The web-app link: https://aicvadvisor.streamlit.app/
 
 ## Features
 
